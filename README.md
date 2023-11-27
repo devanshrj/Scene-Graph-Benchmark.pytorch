@@ -1,5 +1,25 @@
 # Scene Graph Benchmark in Pytorch
 
+## Notes
+- Other options:
+  - [relationformer](https://github.com/suprosanna/relationformer/tree/scene_graph)
+  - [IETrans-SGG](https://github.com/waxnkw/IETrans-SGG.pytorch)
+  - [SGG from NLS](https://github.com/YiwuZhong/SGG_from_NLS)
+  
+### Instructions to Run
+1. Installation: Use pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+2. Download h5 file from DATASET.md
+3. Download pre-trained model
+4. Transfer 2, 3 and images to model
+5. Run commands
+6. Change MODEL.WEIGHTS to MODEL.PRETRAINED_DETECTOR_СКРТ and run again
+```
+python tools/relation_test_net.py --config-file "configs/e2e_relation_X_101_32_8_FPN_1x.yaml" MODEL.ROI_RELATION_HEAD.USE_GT_BOX False MODEL.ROI_RELATION_HEAD.USE_GT_OBJECT_LABEL False MODEL.ROI_RELATION_HEAD.PREDICTOR CausalAnalysisPredictor MODEL.ROI_RELATION_HEAD.CAUSAL.EFFECT_TYPE TDE MODEL.ROI_RELATION_HEAD.CAUSAL.FUSION_TYPE sum MODEL.ROI_RELATION_HEAD.CAUSAL.CONTEXT_LAYER motifs TEST.IMS_PER_BATCH 1 DTYPE "float16" GLOVE_DIR /home/ubuntu/mml MODEL.PRETRAINED_DETECTOR_CKPT /home/ubuntu/mml/upload_causal_motif_sgdet OUTPUT_DIR /home/ubuntu/mml/original_output TEST.CUSTUM_EVAL True TEST.CUSTUM_PATH /home/ubuntu/mml/xgqa_images DETECTED_SGG_DIR /home/ubuntu/mml/xgqa_tde_pretrained_sgg
+```
+```
+python tools/relation_test_net.py --config-file "configs/e2e_relation_X_101_32_8_FPN_1x.yaml" MODEL.ROI_RELATION_HEAD.USE_GT_BOX False MODEL.ROI_RELATION_HEAD.USE_GT_OBJECT_LABEL False MODEL.ROI_RELATION_HEAD.PREDICTOR CausalAnalysisPredictor MODEL.ROI_RELATION_HEAD.CAUSAL.EFFECT_TYPE none MODEL.ROI_RELATION_HEAD.CAUSAL.FUSION_TYPE sum MODEL.ROI_RELATION_HEAD.CAUSAL.CONTEXT_LAYER motifs TEST.IMS_PER_BATCH 1 DTYPE "float16" GLOVE_DIR /home/ubuntu/mml MODEL.PRETRAINED_DETECTOR_CKPT /home/ubuntu/mml/upload_causal_motif_sgdet OUTPUT_DIR /home/ubuntu/mml/original_output TEST.CUSTUM_EVAL True TEST.CUSTUM_PATH /home/ubuntu/mml/xgqa_images DETECTED_SGG_DIR /home/ubuntu/mml/xgqa_original_pretrained_sgg
+```
+
 [![LICENSE](https://img.shields.io/badge/license-MIT-green)](https://github.com/KaihuaTang/Scene-Graph-Benchmark.pytorch/blob/master/LICENSE)
 [![Python](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/)
 ![PyTorch](https://img.shields.io/badge/pytorch-1.2.0-%237732a8)
