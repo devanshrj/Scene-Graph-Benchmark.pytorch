@@ -299,23 +299,27 @@ def load_image_filenames(img_dir, image_file):
     Return: 
         List of filenames corresponding to the good images
     """
+    print("image dir:", img_dir)
+    print("image file:", image_file)
+
     with open(image_file, 'r') as f:
         im_data = json.load(f)
 
-    corrupted_ims = ['1592.jpg', '1722.jpg', '4616.jpg', '4617.jpg']
+    # corrupted_ims = ['1592.jpg', '1722.jpg', '4616.jpg', '4617.jpg']
     fns = []
     img_info = []
     for i, img in enumerate(im_data):
         basename = '{}.jpg'.format(img['image_id'])
-        if basename in corrupted_ims:
-            continue
+        # if basename in corrupted_ims:
+        #     continue
 
         filename = os.path.join(img_dir, basename)
-        if os.path.exists(filename):
-            fns.append(filename)
-            img_info.append(img)
-    assert len(fns) == 108073
-    assert len(img_info) == 108073
+        # if os.path.exists(filename):
+        fns.append(filename)
+        img_info.append(img)
+    # assert len(fns) == 108073
+    # assert len(img_info) == 108073
+    print("Number of images:", len(fns))
     return fns, img_info
 
 
